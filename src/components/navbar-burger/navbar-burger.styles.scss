@@ -1,0 +1,26 @@
+@import '../../scss/mixins';
+
+.navbar-admin {
+  background-color: transparent;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 999;
+
+  @include tablet-only {
+    display: none;
+  }
+
+  &.navbar-burger.burger {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+    border-radius: 4px;
+
+    &:hover,
+    &:focus,
+    &.is-active {
+      background-color: #2c2c2c;
+      color: #ffffff;
+    }
+  }
+}

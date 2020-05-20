@@ -1,0 +1,11 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "files.exclude": {
+    "**/node_modules/[^b]*": true,
+    "**/node_modules/?[^u]*": true,
+    "**/node_modules/??[^l]*": true,
+    "**/node_modules/???[^m]*": true,
+    "**/node_modules/????[^a]*": true
+  }
+}

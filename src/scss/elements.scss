@@ -1,0 +1,22 @@
+// Box
+
+$box-background-color: #f8f8f8;
+$box-radius: 4px;
+$box-shadow: none;
+$box-padding: 1.5em;
+
+// Image
+
+$dimensions: 16 24 32 48 64 96 128 192 256 384;
+
+// Table
+
+$table-cell-padding: 1em 0.75em;
+$table-head-cell-border-width: 0 0 1px;
+$table-head-cell-color: #6e6e6e;
+
+th {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  padding: 1em !important;
+}

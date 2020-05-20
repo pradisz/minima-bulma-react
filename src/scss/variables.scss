@@ -1,0 +1,43 @@
+// Brand Color
+
+$mine-shaft: #2c2c2c;
+$mariner: #1e76e3;
+$denim: #1869cd;
+
+// Colors
+
+$primary: $mine-shaft;
+
+$info: $denim;
+// $success: $green !default
+// $warning: $yellow !default
+// $danger: $red !default
+
+// $light: $white-ter !default
+// $dark: $grey-darker !default
+
+// Link colors
+
+$link: $mine-shaft;
+$link-hover: $mariner;
+
+// Typography
+
+$family-sans-serif: 'Inter', sans-serif;
+$family-primary: $family-sans-serif;
+
+// Responsiveness
+
+// The container horizontal gap, which acts as the offset for breakpoints
+$gap: 32px;
+$small-mobile: 360px; // Small devices width
+// 960, 1152, and 1344 have been chosen because they are divisible by both 12 and 16
+$tablet: 768px;
+// 960px container + 4rem
+$desktop: 960px + (2 * $gap);
+// 1152px container + 4rem
+$widescreen: 1152px + (2 * $gap);
+$widescreen-enabled: true;
+// 1344px container + 4rem
+$fullhd: 1344px + (2 * $gap);
+$fullhd-enabled: true;

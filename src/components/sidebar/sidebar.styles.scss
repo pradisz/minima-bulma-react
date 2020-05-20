@@ -1,0 +1,80 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+.sidebar {
+  position: fixed;
+  width: 0;
+  height: 100vh;
+  z-index: 30;
+  overflow: scroll;
+  background-color: white;
+  transition: width 150ms ease;
+
+  @include desktop {
+    width: 16.188em;
+  }
+
+  @include tablet-only {
+    width: 14.938em;
+  }
+
+  &.is-active {
+    @include until($tablet) {
+      width: 16.188em;
+      background-color: #fafafa;
+      box-shadow: 0 0.5em 1em -0.125em rgba(0, 0, 0, 0.1), 0 0px 0 1px rgba(0, 0, 0, 0.02);
+    }
+
+    @include until($small-mobile) {
+      width: 100vw;
+      box-shadow: none;
+    }
+  }
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.logo {
+  margin: 2.5em auto 1.5em 2.5em;
+}
+
+.nav-title {
+  margin: 2.5em auto 1.5em 3.25em;
+  font-size: 0.75em;
+  text-transform: uppercase;
+}
+
+.nav-item {
+  margin: 0.15em 1.5em;
+  cursor: pointer;
+
+  &:hover,
+  &.active {
+    background-color: #f4f4f4;
+    border-radius: 4px;
+  }
+
+  &:last-child {
+    margin-top: auto;
+    margin-bottom: 25%;
+  }
+}
+
+.link-text {
+  display: flex;
+  padding: 0.5em 1em;
+
+  &:hover,
+  &.active {
+    color: #2c2c2c;
+  }
+}
+
+hr {
+  margin: 1.5em !important;
+}
