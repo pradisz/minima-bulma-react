@@ -1,24 +1,24 @@
 import React, { useRef, createRef, useEffect } from 'react';
-import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-import { toggleSidebarHidden } from '../../redux/ui/ui.actions';
+import useTheme from '../../hooks/useTheme';
 
 import { AppLogo } from '../svg/svg.component';
-
 import './sidebar.styles.scss';
 
 import SidebarMenu from './sidebar.menu';
 
-const Sidebar = ({ sidebarHidden, toggleSidebarHidden }) => {
+const Sidebar = () => {
   const navRef = useRef();
   const navItemRefs = useRef(SidebarMenu.map(() => createRef()));
   const matches = window.matchMedia('(max-width: 768px)').matches;
 
+  const { sidebarHidden, toggleSidebar } = useTheme();
+
   // Handle click inside sidebar
   const handleClickInside = (e) => {
     navItemRefs.current.map((navItemRef) => {
-      if (matches && navItemRef.current && navItemRef.current.contains(e.target)) toggleSidebarHidden();
+      if (matches && navItemRef.current && navItemRef.current.contains(e.target)) toggleSidebar();
       return null;
     });
   };
@@ -26,7 +26,7 @@ const Sidebar = ({ sidebarHidden, toggleSidebarHidden }) => {
   // Handle click outside sidebar
   const handleClickOutside = (e) => {
     if (matches && navRef.current && !navRef.current.contains(e.target)) {
-      if (!sidebarHidden) toggleSidebarHidden();
+      if (!sidebarHidden) toggleSidebar();
     }
   };
 
@@ -76,12 +76,4 @@ const Sidebar = ({ sidebarHidden, toggleSidebarHidden }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  toggleSidebarHidden: () => dispatch(toggleSidebarHidden()),
-});
-
-const mapStateToProps = (state) => ({
-  sidebarHidden: state.ui.sidebarHidden,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
+export default Sidebar;

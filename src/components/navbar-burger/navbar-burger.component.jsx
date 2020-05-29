@@ -1,18 +1,19 @@
 import React, { useRef, useEffect } from 'react';
-import { connect } from 'react-redux';
 
-import { toggleSidebarHidden } from '../../redux/ui/ui.actions';
+import useTheme from '../../hooks/useTheme';
 
 import './navbar-burger.styles.scss';
 
-const NavbarBurger = ({ sidebarHidden, toggleSidebarHidden }) => {
+const NavbarBurger = () => {
   const ref = useRef();
   const matches = window.matchMedia('(max-width: 768px)').matches;
+
+  const { sidebarHidden, toggleSidebar } = useTheme();
 
   // Handle click inside burger menu
   const handleClickInside = (e) => {
     if (sidebarHidden && matches && ref.current && ref.current.contains(e.target)) {
-      return toggleSidebarHidden({ hidden: false });
+      return toggleSidebar({ hidden: false });
     }
     return null;
   };
@@ -43,12 +44,4 @@ const NavbarBurger = ({ sidebarHidden, toggleSidebarHidden }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  toggleSidebarHidden: () => dispatch(toggleSidebarHidden()),
-});
-
-const mapStateToProps = (state) => ({
-  sidebarHidden: state.ui.sidebarHidden,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(NavbarBurger);
+export default NavbarBurger;
