@@ -1,5 +1,7 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
+
+import useAuth from './hooks/useAuth';
 
 import LandingPage from './pages/landing/landing.component';
 import LoginPage from './pages/login/login.component';
@@ -9,6 +11,7 @@ import AccountPage from './pages/account/account.component';
 import OrdersPage from './pages/orders/orders.component';
 import ProductsPage from './pages/products/products.component';
 
+import Spinner from './components/spinner/spinner.component';
 import AdminLayout from './components/admin/admin.component';
 import NavbarBurger from './components/navbar-burger/navbar-burger.component';
 import Sidebar from './components/sidebar/sidebar.component';
@@ -16,10 +19,16 @@ import Sidebar from './components/sidebar/sidebar.component';
 import './App.scss';
 
 function App() {
+  const { currentUser, loading } = useAuth();
+
+  if (loading) {
+    return <Spinner />;
+  }
+
   return (
     <Switch>
       <Route exact path="/" component={LandingPage} />
-      <Route path="/login" component={LoginPage} />
+      <Route path="/login" render={() => (currentUser ? <Redirect to="/" /> : <LoginPage />)} />
       <Route path="/signup" component={SignUpPage} />
       <Route path="/admin" component={AdminPages} />
     </Switch>
