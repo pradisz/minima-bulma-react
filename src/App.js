@@ -1,7 +1,9 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
+import { logout } from './firebase';
 
 import useAuth from './hooks/useAuth';
+import { UserProvider } from './hooks/useSession';
 
 import LandingPage from './pages/landing/landing.component';
 import LoginPage from './pages/login/login.component';
@@ -20,18 +22,32 @@ import './App.scss';
 
 function App() {
   const { currentUser, loading } = useAuth();
+  const history = useHistory();
 
   if (loading) {
     return <Spinner />;
   }
 
+  const onLogout = async () => {
+    await logout();
+    history.push('/login');
+  };
+
   return (
-    <Switch>
-      <Route exact path="/" component={LandingPage} />
-      <Route path="/login" render={() => (currentUser ? <Redirect to="/" /> : <LoginPage />)} />
-      <Route path="/signup" component={SignUpPage} />
-      <Route path="/admin" component={AdminPages} />
-    </Switch>
+    <UserProvider>
+      <Switch>
+        <Route exact path="/" component={LandingPage} />
+        <Route path="/login" render={() => (currentUser ? <Redirect to="/admin" /> : <LoginPage />)} />
+        <Route path="/signup" render={() => (currentUser ? <Redirect to="/admin" /> : <SignUpPage />)} />
+        <Route
+          path="/logout"
+          render={() => {
+            onLogout();
+          }}
+        />
+        <Route path="/admin" component={AdminPages} />
+      </Switch>
+    </UserProvider>
   );
 }
 

@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { logout } from '../../firebase';
 
-import useAuth from '../../hooks/useAuth';
+import useSession from '../../hooks/useSession';
 
 import { AppLogoAlt } from '../../components/svg/svg.component';
 
 import { Navbar, NavbarBurger, AuthButton, Hero } from './landing.styles';
 
 const LandingPage = () => {
-  const { currentUser } = useAuth();
+  const { currentUser } = useSession();
   const [isActive, setToggle] = useState(false);
   const history = useHistory();
 
-  const handleLogout = async () => {
+  const onLogout = async () => {
     await logout();
     history.push('/login');
   };
@@ -41,7 +41,7 @@ const LandingPage = () => {
                 <div className={`navbar-menu ${isActive ? 'is-active has-text-right' : ''}`}>
                   <div className="navbar-item">
                     {currentUser ? (
-                      <AuthButton onClick={handleLogout} className="button is-primary is-rounded">
+                      <AuthButton onClick={onLogout} className="button is-primary is-rounded">
                         Log out
                       </AuthButton>
                     ) : (

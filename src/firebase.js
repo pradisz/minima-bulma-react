@@ -19,11 +19,12 @@ firebase.initializeApp(config);
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
-const google = new firebase.auth.GoogleAuthProvider();
-google.setCustomParameters({ prompt: 'select_account' });
+const googleProvider = new firebase.auth.GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: 'select_account' });
 
+export const createUserWithCredentials = (email, password) => auth.createUserWithEmailAndPassword(email, password);
 export const signInWithCredentials = (email, password) => auth.signInWithEmailAndPassword(email, password);
-export const signInWithGoogle = () => auth.signInWithPopup(google);
+export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
 export const logout = () => auth.signOut();
 
 export default firebase;

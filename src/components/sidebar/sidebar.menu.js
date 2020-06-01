@@ -31,7 +31,7 @@ const sidebarMenu = [
   {
     id: 6,
     type: 'nav-item',
-    linkUrl: '/',
+    linkUrl: '/logout',
     linkText: 'Log out',
   },
 ];

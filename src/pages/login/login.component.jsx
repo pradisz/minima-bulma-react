@@ -1,23 +1,29 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { signInWithCredentials } from '../../firebase.js';
 
-import { signInWithCredentials, signInWithGoogle } from '../../firebase.js';
-
-import { Hero, Title, AuthInput, AuthButton, OAuthTitle, OAuthButton } from '../../components/auth/auth.component';
-import { AppLogo, GoogleIcon, FacebookIcon } from '../../components/svg/svg.component';
+import { Hero, Title, AuthInput, AuthButton } from '../../components/auth/auth.component';
+import { AppLogo } from '../../components/svg/svg.component';
+import OAuth from '../../components/o-auth/o-auth.component';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(undefined);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    try {
-      await signInWithCredentials(email, password);
-    } catch (error) {
-      setError(error.message);
-    }
+    setLoading(true);
+    signInWithCredentials(email, password).then(
+      () => {
+        setLoading(false);
+      },
+      (error) => {
+        setError(error.message);
+        setLoading(false);
+      }
+    );
   };
 
   return (
@@ -31,7 +37,7 @@ const LoginPage = () => {
                   <AppLogo />
                 </Link>
                 <Title className="title">Sign in</Title>
-                {error ? <div class="notification is-danger is-light">{error}</div> : null}
+                {error ? <div className="notification is-danger is-light">{error}</div> : null}
                 <form onSubmit={handleSubmit}>
                   <div className="field">
                     <div className="control has-icons-right">
@@ -45,7 +51,6 @@ const LoginPage = () => {
                       />
                     </div>
                   </div>
-
                   <div className="field">
                     <div className="control has-icons-right">
                       <AuthInput
@@ -58,22 +63,19 @@ const LoginPage = () => {
                       />
                     </div>
                   </div>
-
                   <div className="control">
-                    <AuthButton type="submit" className="button is-dark is-fullwidth has-text-weight-semibold">
+                    <AuthButton
+                      type="submit"
+                      className={`button is-dark is-fullwidth has-text-weight-semibold ${
+                        isLoading ? 'is-loading' : null
+                      }`}
+                    >
                       Log in
                     </AuthButton>
                   </div>
                 </form>
                 <Link to="/signup">Don't have an account?</Link>
-                <OAuthTitle>OR</OAuthTitle>
-                <OAuthButton google onClick={signInWithGoogle} className="button is-rounded is-fullwidth">
-                  <GoogleIcon />
-                  Continue with Google
-                </OAuthButton>
-                <OAuthButton facebook className="button is-rounded is-fullwidth">
-                  <FacebookIcon /> Continue with Facebook
-                </OAuthButton>
+                <OAuth />
               </div>
             </div>
           </div>
