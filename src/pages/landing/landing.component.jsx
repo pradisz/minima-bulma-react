@@ -63,12 +63,12 @@ const LandingPage = () => {
                 <p className="subtitle">React & Firebase boilerplate with Bulma CSS Framework.</p>
               </div>
               <div className="column is-narrow">
-                <Link to="/admin" className="button is-primary is-inverted">
+                <a href="https://github.com/diszy10/minima-bulma-react" className="button is-primary is-inverted">
                   <span>DOCS</span>
                   <span className="icon">
                     <span className="material-icons">arrow_right_alt</span>
                   </span>
-                </Link>
+                </a>
               </div>
             </div>
           </div>

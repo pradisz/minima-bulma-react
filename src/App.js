@@ -45,7 +45,7 @@ function App() {
             onLogout();
           }}
         />
-        <Route path="/admin" component={AdminPages} />
+        <Route path="/admin" render={() => (currentUser ? <AdminPages /> : <Redirect to="/login" />)} />
       </Switch>
     </UserProvider>
   );
