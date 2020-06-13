@@ -1,9 +1,8 @@
 import React from 'react';
-import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
+import { Switch, Route, Redirect, useHistory, useRouteMatch } from 'react-router-dom';
 import { logout } from './firebase';
 
-import useAuth from './hooks/useAuth';
-import { UserProvider } from './hooks/useSession';
+import { AuthProvider, useAuth } from './hooks/useAuth';
 
 import LandingPage from './pages/landing/landing.component';
 import LoginPage from './pages/login/login.component';
@@ -20,11 +19,19 @@ import Sidebar from './components/sidebar/sidebar.component';
 
 import './App.scss';
 
-function App() {
-  const { currentUser, loading } = useAuth();
+const App = () => {
+  return (
+    <AuthProvider>
+      <AppRoutes />
+    </AuthProvider>
+  );
+};
+
+const AppRoutes = () => {
+  const { currentUser, isLoading } = useAuth();
   const history = useHistory();
 
-  if (loading) {
+  if (isLoading) {
     return <Spinner />;
   }
 
@@ -34,34 +41,36 @@ function App() {
   };
 
   return (
-    <UserProvider>
-      <Switch>
-        <Route exact path="/" component={LandingPage} />
-        <Route path="/login" render={() => (currentUser ? <Redirect to="/admin" /> : <LoginPage />)} />
-        <Route path="/signup" render={() => (currentUser ? <Redirect to="/admin" /> : <SignUpPage />)} />
-        <Route
-          path="/logout"
-          render={() => {
-            onLogout();
-          }}
-        />
-        <Route path="/admin" render={() => (currentUser ? <AdminPages /> : <Redirect to="/login" />)} />
-      </Switch>
-    </UserProvider>
+    <Switch>
+      <Route exact path="/" component={LandingPage} />
+      <Route path="/login" render={() => (currentUser ? <Redirect to="/admin" /> : <LoginPage />)} />
+      <Route path="/signup" render={() => (currentUser ? <Redirect to="/admin" /> : <SignUpPage />)} />
+      <Route
+        path="/logout"
+        render={() => {
+          onLogout();
+        }}
+      />
+      <Route path="/admin" render={() => (currentUser ? <AdminRoutes /> : <Redirect to="/login" />)} />
+    </Switch>
   );
-}
+};
 
-const AdminPages = ({ match }) => (
-  <Switch>
-    <AdminLayout>
-      <NavbarBurger />
-      <Sidebar />
-      <Route exact path={`${match.path}`} component={HomePage} />
-      <Route path={`${match.path}/account`} component={AccountPage} />
-      <Route path={`${match.path}/orders`} component={OrdersPage} />
-      <Route path={`${match.path}/products`} component={ProductsPage} />
-    </AdminLayout>
-  </Switch>
-);
+const AdminRoutes = () => {
+  let match = useRouteMatch();
+
+  return (
+    <Switch>
+      <AdminLayout>
+        <NavbarBurger />
+        <Sidebar />
+        <Route exact path={`${match.path}`} component={HomePage} />
+        <Route path={`${match.path}/account`} component={AccountPage} />
+        <Route path={`${match.path}/orders`} component={OrdersPage} />
+        <Route path={`${match.path}/products`} component={ProductsPage} />
+      </AdminLayout>
+    </Switch>
+  );
+};
 
 export default App;

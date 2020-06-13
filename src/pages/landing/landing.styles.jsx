@@ -20,7 +20,6 @@ export const NavbarBurger = styled.button`
 `;
 
 export const AuthButton = styled.button`
-  width: 100px;
   height: 40px;
   font-weight: bold;
 

@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import useSession from '../../hooks/useSession';
+import { useAuth } from '../../hooks/useAuth';
 
 const HomePage = () => {
-  const { currentUser } = useSession();
+  const { currentUser } = useAuth();
 
   return (
     <div className="main container">
       <h1 className="title is-4">
-        Welcome, <span className="has-text-weight-normal">{currentUser?.email}!</span>
+        Welcome, <span className="has-text-weight-normal">{currentUser?.displayName}!</span>
       </h1>
       <div className="columns">
         <div className="column is-half-tablet is-one-third-desktop">
