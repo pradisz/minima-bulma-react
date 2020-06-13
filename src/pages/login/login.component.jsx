@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { signInWithCredentials } from '../../firebase.js';
+
+import { useAuth } from '../../hooks/useAuth';
 
 import { Hero, Title, AuthInput, AuthButton } from '../../components/auth/auth.component';
 import { AppLogo } from '../../components/svg/svg.component';
 import OAuth from '../../components/o-auth/o-auth.component';
 
 const LoginPage = () => {
+  const { signInWithCredentials } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setLoading] = useState(false);

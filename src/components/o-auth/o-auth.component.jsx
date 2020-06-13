@@ -1,11 +1,13 @@
 import React from 'react';
 
-import { signInWithGoogle } from '../../firebase.js';
+import { useAuth } from '../../hooks/useAuth';
 
 import { OAuthTitle, OAuthButton } from '../../components/auth/auth.component';
 import { GoogleIcon, FacebookIcon } from '../../components/svg/svg.component';
 
 const OAuth = () => {
+  const { signInWithGoogle } = useAuth();
+
   return (
     <>
       <OAuthTitle>OR</OAuthTitle>

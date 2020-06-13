@@ -1,26 +1,25 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { createUserWithCredentials } from '../../firebase.js';
+import { useAuth } from '../../hooks/useAuth';
 
 import { Hero, Title, AuthInput, AuthButton } from '../../components/auth/auth.component';
 import { AppLogo } from '../../components/svg/svg.component';
 import OAuth from '../../components/o-auth/o-auth.component';
 
 const SignupPage = () => {
+  const { createUserWithCredentials } = useAuth();
   const [displayName, setdisplayName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(undefined);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-    createUserWithCredentials(email, password).then(
-      () => {
-        setLoading(false);
-      },
+    createUserWithCredentials(email, password, displayName).then(
+      () => {},
       (error) => {
         setError(error.message);
         setLoading(false);

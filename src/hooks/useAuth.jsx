@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
 
-import { auth, logout } from '../firebase';
+import firebase, { auth } from '../firebase';
 
 const authContext = createContext();
 
@@ -18,7 +18,35 @@ const useProvideAuth = () => {
   const [currentUser, setUser] = useState(null);
   const [isLoading, setLoading] = useState(!auth.currentUser);
 
-  const signOut = () => logout();
+  const googleProvider = new firebase.auth.GoogleAuthProvider();
+  googleProvider.setCustomParameters({ prompt: 'select_account' });
+
+  const signOut = () => auth.signOut();
+
+  const signInWithCredentials = (email, password) => auth.signInWithEmailAndPassword(email, password);
+
+  const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
+
+  const createUserWithCredentials = async (email, password, displayName) => {
+    const result = await auth.createUserWithEmailAndPassword(email, password).catch((error) => {
+      throw error;
+    });
+
+    setLoading(true);
+    result.user
+      .updateProfile({
+        displayName,
+      })
+      .then(
+        () => {
+          setLoading(false);
+        },
+        (error) => {
+          setLoading(false);
+          throw error;
+        }
+      );
+  };
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
@@ -33,5 +61,8 @@ const useProvideAuth = () => {
     currentUser,
     isLoading,
     signOut,
+    signInWithCredentials,
+    signInWithGoogle,
+    createUserWithCredentials,
   };
 };

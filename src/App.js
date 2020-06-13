@@ -1,6 +1,5 @@
 import React from 'react';
 import { Switch, Route, Redirect, useHistory, useRouteMatch } from 'react-router-dom';
-import { logout } from './firebase';
 
 import { AuthProvider, useAuth } from './hooks/useAuth';
 
@@ -28,7 +27,7 @@ const App = () => {
 };
 
 const AppRoutes = () => {
-  const { currentUser, isLoading } = useAuth();
+  const { currentUser, isLoading, signOut } = useAuth();
   const history = useHistory();
 
   if (isLoading) {
@@ -36,7 +35,7 @@ const AppRoutes = () => {
   }
 
   const onLogout = async () => {
-    await logout();
+    await signOut();
     history.push('/login');
   };
 
