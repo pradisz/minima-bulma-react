@@ -11,6 +11,7 @@ export const Title = styled.h1`
 
 export const AuthInput = styled.input`
   height: 3.125em;
+  border-color: transparent;
 
   &::placeholder {
     font-size: 1rem;

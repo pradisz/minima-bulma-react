@@ -9,8 +9,8 @@ import OAuth from '../../components/o-auth/o-auth.component';
 
 const LoginPage = () => {
   const { signInWithCredentials } = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('test@email.com');
+  const [password, setPassword] = useState('test123');
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(undefined);
 

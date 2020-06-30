@@ -1,4 +1,8 @@
 // Form
 
-$input-border-color: transparent;
 $input-radius: 4px;
+$label-color: #6e6e6e;
+
+label {
+  font-size: 0.75rem !important;
+}
