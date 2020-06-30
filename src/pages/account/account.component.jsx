@@ -24,7 +24,7 @@ const AccountPage = () => {
     setLoading(true);
     setTimeout(() => {
       setSuccess('This is success response example');
-      setError('This is success response example');
+      setError('This is error response example');
       setLoading(false);
     }, 1500);
 
