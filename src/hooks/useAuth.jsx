@@ -49,7 +49,7 @@ const useProvideAuth = () => {
       );
   };
 
-  const editProfile = (displayName, imageUri, fileName) => {
+  const editProfile = (displayName, imageUri) => {
     const userAuth = firebase.auth().currentUser;
     const usersRef = firebase.firestore().collection('users').doc(currentUser.uid);
 

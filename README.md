@@ -1,68 +1,63 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# minima-bulma-react
 
-## Available Scripts
+A modern web-app starter with Create React App and Firebase based on Bulma CSS Framework.
 
-In the project directory, you can run:
+## Demo
 
-### `yarn start`
+- https://minima-bulma-react.web.app/
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Features
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- Minimal web dashboard with `Bulma 0.9.0`
+- Firebase authentication with Email, Google or Facebook
+- Update firebase authentication profile functionality
+- React Hooks
+- Context API
 
-### `yarn test`
+## Prerequisites
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Create a Firebase Project using the [Firebase Developer Console](https://console.firebase.google.com)
+- Enable Email, Google and Facebook sign-in in your [authentication provider settings](https://console.firebase.google.com/project/_/authentication/providers).
+- Install [Firebase CLI Tools](https://github.com/firebase/firebase-tools) if you have not already and log in with `firebase login`.
+- Configure this sample to use your project using `firebase use --add` and select your project.
 
-### `yarn build`
+## Installing
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+A step by step series of examples that tell you how to get a development env running
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+```
+yarn install
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+or
 
-### `yarn eject`
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Rename `.env.example` to `.env` and add your firebase app configuration in react environtment variables:
+```
+REACT_APP_API_KEY = "FIREBASE_API_KEY"
+REACT_APP_AUTH_DOMAIN = "FIREBASE_AUTH_DOMAIN"
+REACT_APP_DATABASE_URL = "FIREBASE_DATABASE_URL"
+REACT_APP_PROJECT_ID = "FIREBASE_PROJECT_ID"
+REACT_APP_STORAGE_BUCKET = "FIREBASE_STORAGE_BUCKET"
+REACT_APP_MESSAGING_SENDER_ID = "FIREBASE_MESSAGING_SENDER_ID"
+REACT_APP_APP_ID = "FIREBASE_APP_ID"
+REACT_APP_MEASUREMENT_ID = "FIREBASE_MEASUREMENT_ID"
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Running Locally
+```
+yarn start
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+or
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+npm start
+```
 
-## Learn More
+## Deployment
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+yarn build
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+firebase deploy
+```
