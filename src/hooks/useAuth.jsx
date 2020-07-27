@@ -57,15 +57,15 @@ const useProvideAuth = () => {
       return uploadImageAsync('users', imageUri, currentUser.uid).then((photoURL) => {
         return userAuth
           .updateProfile({ displayName, photoURL })
-          .then(() => {
+          .then(() =>
             usersRef
               .set({ displayName, photoURL }, { merge: true })
               .then(() => 'Profile updated successfully!')
               .catch((error) => {
                 console.error(error);
                 throw error;
-              });
-          })
+              })
+          )
           .catch((error) => {
             console.error(error);
             throw error;
@@ -74,15 +74,15 @@ const useProvideAuth = () => {
     } else {
       return userAuth
         .updateProfile({ displayName })
-        .then(() => {
+        .then(() =>
           usersRef
             .set({ displayName }, { merge: true })
             .then(() => 'Profile updated successfully!')
             .catch((error) => {
               console.error(error);
               throw error;
-            });
-        })
+            })
+        )
         .catch((error) => {
           console.error(error);
           throw error;
