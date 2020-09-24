@@ -1,6 +1,6 @@
 # minima-bulma-react
 
-A modern web-app starter with Create React App and Firebase based on Bulma CSS Framework.
+A minimal web dashboard starter with Create React App and Firebase based on Bulma CSS Framework.
 
 ## Demo
 
@@ -10,7 +10,7 @@ A modern web-app starter with Create React App and Firebase based on Bulma CSS F
 
 - Minimal web dashboard with `Bulma 0.9.0`
 - Firebase authentication with Email, Google or Facebook
-- Update firebase authentication profile functionality
+- Update firebase authentication profile
 - React Hooks
 - Context API
 
